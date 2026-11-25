@@ -8,14 +8,13 @@ Medir el comportamiento del agente en un conjunto controlado de consultas, regis
 
 ## Archivos
 
-- `docs/borrador_informe_EP3.md`: estructura preliminar del informe.
+
 - `casos_prueba.json`: escenarios y resultados esperados para la evaluación.
 - `esquema_eventos.json`: campos propuestos para registrar métricas y trazas.
 - `registro_pruebas.csv`: resultados observados durante las consultas manuales.
 - `mediciones_recursos.csv` y `registro_recursos.csv`: mediciones de CPU y memoria observadas con Docker.
 - `dashboard.py`: genera el tablero HTML desde los CSV.
 - `dashboard.html`: visualización generada.
-- `Informe_EP3_corregido.docx`: copia corregida del informe con evidencias del dashboard.
 
 ## Actualizar y abrir el dashboard
 
