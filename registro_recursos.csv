@@ -1,0 +1,3 @@
+fecha,escenario,prueba,cpu_min_pct,cpu_max_pct,memoria_mib,nota
+2026-11-24,reposo,sin_consulta,0.16,0.27,188.8,"Lectura informada por el usuario; se interpreta el texto 1.88.8 MiB como 188.8 MiB."
+2026-11-24,durante_consulta,OBS-02_Diseño_Norte_2026-10,1.23,4.16,189.2,"Lecturas observadas mientras el agente respondía una consulta."

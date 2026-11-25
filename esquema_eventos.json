@@ -1,0 +1,27 @@
+{
+  "descripcion": "Esquema inicial de eventos de observabilidad para EVA3. No registrar prompts, respuestas, notas, credenciales ni identificadores de empresa.",
+  "campos": {
+    "timestamp_utc": "Fecha y hora UTC en formato ISO 8601",
+    "request_id": "Identificador aleatorio de la solicitud, sin datos de usuario",
+    "stage": "Etapa: api, modelo, herramienta o respuesta",
+    "operation": "Tipo lógico de operación, por ejemplo consulta_mensual o busqueda_memoria",
+    "duration_ms": "Duración de la etapa en milisegundos, cuando corresponda",
+    "status": "ok o error",
+    "error_category": "Categoría resumida del error; null si status es ok",
+    "model_name": "Nombre del modelo usado, si aplica",
+    "input_tokens": "Cantidad informada por el proveedor o null si no está disponible",
+    "output_tokens": "Cantidad informada por el proveedor o null si no está disponible"
+  },
+  "ejemplo": {
+    "timestamp_utc": "2026-11-24T12:00:00Z",
+    "request_id": "e6a64c38-5f66-4c0e-a440-2e9fec2b3500",
+    "stage": "herramienta",
+    "operation": "consulta_mensual",
+    "duration_ms": 84,
+    "status": "ok",
+    "error_category": null,
+    "model_name": null,
+    "input_tokens": null,
+    "output_tokens": null
+  }
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Observabilidad del agente IA</title>
+<style>
+:root{--ink:#19324b;--muted:#66788a;--blue:#2b6cb0;--pale:#eaf2fb;--green:#16794b;--border:#dce4ec;--bg:#f4f7fb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1150px;margin:0 auto;padding:32px 24px 48px}header{margin-bottom:22px}h1{font-size:28px;margin:0 0 5px}h2{font-size:19px;margin:0 0 18px}.muted{color:var(--muted)}
+.notice{background:#fff8df;border:1px solid #f0dda1;border-radius:10px;padding:12px 15px;margin:18px 0 22px;color:#634e12}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}.card,.panel{background:white;border:1px solid var(--border);border-radius:12px;padding:18px;box-shadow:0 2px 8px #1b3a5710}.card .label{color:var(--muted);font-size:13px}.card strong{display:block;font-size:25px;margin-top:7px}.panel{margin:16px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.chart{display:grid;gap:11px}.barrow{display:grid;grid-template-columns:140px 1fr 55px;gap:9px;align-items:center;font-size:13px}.bar-bg{height:14px;background:#edf2f7;border-radius:9px;overflow:hidden}.bar{height:100%;background:var(--blue);border-radius:9px;min-width:2px}.bar.cpu{background:#dd8b24}.bar.mem{background:#48a27a}.filters{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 14px}select{padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:white;color:var(--ink)}
+.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--border);white-space:nowrap}th{color:var(--muted);font-weight:600}.ok{color:var(--green);font-weight:600}.empty{color:var(--muted);padding:12px 0}.foot{font-size:12px;color:var(--muted);margin-top:22px}
+@media(max-width:800px){.cards{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.barrow{grid-template-columns:105px 1fr 45px}}
+@media(max-width:480px){main{padding:22px 14px}.cards{grid-template-columns:1fr 1fr}.card{padding:13px}.card strong{font-size:21px}}
+</style>
+</head>
+<body><main>
+<header><p class="muted">EVA3 · evaluación manual registrada</p><h1>Observabilidad del agente IA</h1><p class="muted">Resumen de respuestas, latencia y recursos observados.</p></header>
+<div class="notice">Muestra inicial. Las métricas reflejan únicamente las ejecuciones registradas en los archivos CSV; no representan todavía una evaluación general del agente.</div>
+<section class="cards" id="cards"></section>
+<div class="grid">
+<section class="panel"><h2>Tiempo de respuesta por ejecución</h2><div class="chart" id="latency-chart"></div></section>
+<section class="panel"><h2>CPU observado</h2><div class="chart" id="cpu-chart"></div><p class="muted">Porcentaje informado por Docker.</p></section>
+</div>
+<section class="panel"><h2>Memoria observada</h2><div class="chart" id="memory-chart"></div><p class="muted">Memoria del contenedor durante las observaciones.</p></section>
+<section class="panel"><h2>Registro de pruebas</h2>
+<div class="filters"><label>Empresa <select id="company-filter"><option value="">Todas</option></select></label><label>Prueba <select id="test-filter"><option value="">Todas</option></select></label></div>
+<div class="table-wrap"><table><thead><tr><th>Prueba</th><th>Empresa</th><th>Período</th><th>Ventas esperadas/observadas</th><th>Compras esperadas/observadas</th><th>Tiempo</th><th>Resultado</th></tr></thead><tbody id="results-body"></tbody></table></div>
+</section>
+<p class="foot">Generado localmente desde registro_pruebas.csv y mediciones_recursos.csv. Para actualizar el dashboard, vuelve a ejecutar el generador.</p>
+</main>
+<script id="dashboard-data" type="application/json">{"stats": {"numeric_correct": 6, "numeric_total": 6, "consistency_correct": 5, "consistency_total": 5, "median_seconds": 39.0, "mean_seconds": 36, "failures": 0, "executions": 8}, "runs": [{"label": "OBS-01 · intento 1", "seconds": 40}, {"label": "OBS-01 · intento 2", "seconds": 49}, {"label": "OBS-01 · intento 3", "seconds": 40}, {"label": "OBS-01 · intento 4", "seconds": 38}, {"label": "OBS-01 · intento 5", "seconds": 28}, {"label": "OBS-04 · intento 1", "seconds": 30}, {"label": "OBS-05 · intento 1", "seconds": 42}, {"label": "OBS-02 · intento 1", "seconds": 21}], "resources": [{"state": "sin_consulta", "cpu_min": 0.16, "cpu_max": 0.27, "memory": 188.8}, {"state": "durante_consulta", "cpu_min": 1.23, "cpu_max": 4.16, "memory": 189.2}], "details": [{"test_id": "OBS-01", "company": "Servicios Creativos (Empresa de demostración)", "period": "2026-10", "expected_sales": "$1.173.000", "actual_sales": "$1.173.000", "expected_purchases": "$311.900", "actual_purchases": "$311.900", "seconds": "40", "result": "coinciden_montos"}, {"test_id": "OBS-01", "company": "Servicios Creativos (Empresa de demostración)", "period": "2026-10", "expected_sales": "$1.173.000", "actual_sales": "$1.173.000", "expected_purchases": "$311.900", "actual_purchases": "$311.900", "seconds": "49", "result": "coinciden_montos"}, {"test_id": "OBS-01", "company": "Servicios Creativos (Empresa de demostración)", "period": "2026-10", "expected_sales": "$1.173.000", "actual_sales": "$1.173.000", "expected_purchases": "$311.900", "actual_purchases": "$311.900", "seconds": "40", "result": "coinciden_montos"}, {"test_id": "OBS-01", "company": "Servicios Creativos (Empresa de demostración)", "period": "2026-10", "expected_sales": "$1.173.000", "actual_sales": "$1.173.000", "expected_purchases": "$311.900", "actual_purchases": "$311.900", "seconds": "38", "result": "coinciden_montos"}, {"test_id": "OBS-01", "company": "Servicios Creativos (Empresa de demostración)", "period": "2026-10", "expected_sales": "$1.173.000", "actual_sales": "$1.173.000", "expected_purchases": "$311.900", "actual_purchases": "$311.900", "seconds": "28", "result": "coinciden_montos"}, {"test_id": "OBS-04", "company": "Servicios Creativos (Empresa de demostración)", "period": "no_indicado", "expected_sales": "—", "actual_sales": "—", "expected_purchases": "—", "actual_purchases": "—", "seconds": "30", "result": "respuesta_aclaratoria_correcta"}, {"test_id": "OBS-05", "company": "Servicios Creativos (Empresa de demostración)", "period": "2026-13", "expected_sales": "—", "actual_sales": "—", "expected_purchases": "—", "actual_purchases": "—", "seconds": "42", "result": "periodo_invalido_rechazado"}, {"test_id": "OBS-02", "company": "Diseño Norte (Empresa de demostración)", "period": "2026-10", "expected_sales": "$515.500", "actual_sales": "$515.500", "expected_purchases": "$131.700", "actual_purchases": "$131.700", "seconds": "21", "result": "coinciden_montos"}], "companies": ["Diseño Norte (Empresa de demostración)", "Servicios Creativos (Empresa de demostración)"], "test_ids": ["OBS-01", "OBS-02", "OBS-04", "OBS-05"]}</script>
+<script>
+const d=JSON.parse(document.getElementById('dashboard-data').textContent);
+const pct=(a,b)=>b?Math.round(100*a/b)+'%':'—';
+const median=d.stats.median_seconds===null?'—':d.stats.median_seconds+' s';
+const cards=[
+ ['Consultas numéricas correctas',d.stats.numeric_correct+'/'+d.stats.numeric_total+' · '+pct(d.stats.numeric_correct,d.stats.numeric_total)],
+ ['Consistencia en OBS-01',d.stats.consistency_correct+'/'+d.stats.consistency_total+' · '+pct(d.stats.consistency_correct,d.stats.consistency_total)],
+ ['Latencia mediana',median],
+ ['Errores registrados',d.stats.failures+'/'+d.stats.executions]
+];
+document.getElementById('cards').innerHTML=cards.map(x=>'<article class="card"><span class="label">'+x[0]+'</span><strong>'+x[1]+'</strong></article>').join('');
+function drawBars(target,items,max,key,labelFn,kind){
+ const el=document.getElementById(target); if(!items.length){el.innerHTML='<div class="empty">No hay mediciones registradas.</div>';return;}
+ el.innerHTML=items.map(item=>{const val=item[key];const w=max?Math.max(2,val/max*100):0;return '<div class="barrow"><span>'+labelFn(item)+'</span><div class="bar-bg"><div class="bar '+kind+'" style="width:'+w+'%"></div></div><b>'+val+'</b></div>';}).join('');
+}
+const maxTime=Math.max(1,...d.runs.map(x=>x.seconds));
+drawBars('latency-chart',d.runs,maxTime,'seconds',x=>x.label,'');
+const cpu=d.resources.map(x=>({label:x.state==='sin_consulta'?'En reposo':'Durante consulta',min:x.cpu_min,max:x.cpu_max}));
+const maxCpu=Math.max(1,...cpu.map(x=>x.max));
+document.getElementById('cpu-chart').innerHTML=cpu.length?cpu.map(x=>'<div class="barrow"><span>'+x.label+'</span><div class="bar-bg"><div class="bar cpu" style="width:'+Math.max(2,x.max/maxCpu*100)+'%"></div></div><b>'+x.min+'–'+x.max+'%</b></div>').join(''):'<div class="empty">No hay mediciones registradas.</div>';
+const maxMem=Math.max(1,...d.resources.map(x=>x.memory));
+drawBars('memory-chart',d.resources,maxMem,'memory',x=>x.state==='sin_consulta'?'En reposo':'Durante consulta','mem');
+const company=document.getElementById('company-filter'), test=document.getElementById('test-filter');
+d.companies.forEach(x=>company.add(new Option(x,x)));d.test_ids.forEach(x=>test.add(new Option(x,x)));
+function renderTable(){const filtered=d.details.filter(x=>(!company.value||x.company===company.value)&&(!test.value||x.test_id===test.value));document.getElementById('results-body').innerHTML=filtered.map(x=>'<tr><td>'+x.test_id+'</td><td>'+x.company+'</td><td>'+x.period+'</td><td>'+x.expected_sales+' / '+x.actual_sales+'</td><td>'+x.expected_purchases+' / '+x.actual_purchases+'</td><td>'+x.seconds+(x.seconds==='—'?'':' s')+'</td><td class="ok">'+x.result+'</td></tr>').join('');}
+company.addEventListener('change',renderTable);test.addEventListener('change',renderTable);renderTable();
+</script></body></html>

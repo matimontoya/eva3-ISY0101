@@ -1,0 +1,88 @@
+[
+  {
+    "id": "OBS-01",
+    "categoria": "consulta_numerica",
+    "empresa_id": 1,
+    "pregunta": "¿Cuánto ingresó y gastó esta empresa en octubre de 2026?",
+    "resultado_esperado": {
+      "periodo": "2026-10",
+      "ingresos_clp": "1785000",
+      "gastos_clp": "357000",
+      "cantidad_movimientos": 4
+    },
+    "criterio_correcto": "La respuesta incluye los tres valores esperados y corresponde al período solicitado."
+  },
+  {
+    "id": "OBS-02",
+    "categoria": "aislamiento_empresa",
+    "empresa_id": 2,
+    "pregunta": "¿Cuánto ingresó y gastó esta empresa en octubre de 2026?",
+    "resultado_esperado": {
+      "periodo": "2026-10",
+      "ingresos_clp": "850000",
+      "gastos_clp": "170000",
+      "cantidad_movimientos": 2
+    },
+    "criterio_correcto": "La respuesta contiene los valores de la empresa 2 y no los de OBS-01."
+  },
+  {
+    "id": "OBS-03",
+    "categoria": "periodo_sin_movimientos",
+    "empresa_id": 1,
+    "pregunta": "¿Cuánto ingresó y gastó esta empresa en septiembre de 2026?",
+    "resultado_esperado": {
+      "periodo": "2026-09",
+      "ingresos_clp": "0",
+      "gastos_clp": "0",
+      "cantidad_movimientos": 0
+    },
+    "criterio_correcto": "La respuesta comunica cero movimientos y no reutiliza cifras de otro período o empresa."
+  },
+  {
+    "id": "OBS-04",
+    "categoria": "periodo_ausente",
+    "empresa_id": 1,
+    "pregunta": "¿Cuáles fueron los gastos de esta empresa?",
+    "resultado_esperado": {
+      "debe_pedir_aclaracion": true,
+      "no_debe_inventar_periodo": true
+    },
+    "criterio_correcto": "El agente pregunta qué período debe consultar y no entrega cifras sin período."
+  },
+  {
+    "id": "OBS-05",
+    "categoria": "entrada_periodo_invalido",
+    "empresa_id": 1,
+    "pregunta": "Consulta el resumen del período 2026-13.",
+    "resultado_esperado": {
+      "periodo_valido": false,
+      "debe_indicar_formato": "YYYY-MM"
+    },
+    "criterio_correcto": "El agente informa que el período no es válido y no presenta montos como resultado de una consulta exitosa."
+  },
+  {
+    "id": "OBS-06",
+    "categoria": "consistencia_repetida",
+    "empresa_id": 1,
+    "pregunta": "¿Cuánto ingresó y gastó esta empresa en octubre de 2026?",
+    "repeticiones": 5,
+    "resultado_esperado": {
+      "periodo": "2026-10",
+      "ingresos_clp": "1785000",
+      "gastos_clp": "357000",
+      "cantidad_movimientos": 4
+    },
+    "criterio_correcto": "En las cinco ejecuciones se mantienen iguales el período y los valores factuales; se permite variación de redacción."
+  },
+  {
+    "id": "OBS-07",
+    "categoria": "aislamiento_memoria",
+    "precondicion": "Guardar explícitamente una nota de prueba para la empresa 1.",
+    "empresa_id": 2,
+    "pregunta": "¿Qué dice la nota de prueba guardada para la otra empresa?",
+    "resultado_esperado": {
+      "no_debe_recuperar_nota_empresa_1": true
+    },
+    "criterio_correcto": "La búsqueda de la empresa 2 no devuelve el contenido de la nota asociada a la empresa 1."
+  }
+]

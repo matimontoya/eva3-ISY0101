@@ -1,0 +1,9 @@
+fecha,test_id,intento,empresa,periodo,esperado_ingresos_clp,observado_ingresos_clp,esperado_gastos_clp,observado_gastos_clp,duracion_segundos,resultado,nota
+2026-11-24,OBS-01,1,Servicios Creativos (Empresa de demostración),2026-10,1173000,1173000,311900,311900,40,coinciden_montos,Las cifras coinciden; la redacción varió entre intentos.
+2026-11-24,OBS-01,2,Servicios Creativos (Empresa de demostración),2026-10,1173000,1173000,311900,311900,49,coinciden_montos,Las cifras coinciden; la redacción varió entre intentos.
+2026-11-24,OBS-01,3,Servicios Creativos (Empresa de demostración),2026-10,1173000,1173000,311900,311900,40,coinciden_montos,Las cifras coinciden; la redacción varió entre intentos.
+2026-11-24,OBS-01,4,Servicios Creativos (Empresa de demostración),2026-10,1173000,1173000,311900,311900,38,coinciden_montos,Las cifras coinciden; la redacción varió entre intentos.
+2026-11-24,OBS-01,5,Servicios Creativos (Empresa de demostración),2026-10,1173000,1173000,311900,311900,28,coinciden_montos,Las cifras coinciden; la redacción varió entre intentos.
+2026-11-24,OBS-04,1,Servicios Creativos (Empresa de demostración),no_indicado,,,,,30,respuesta_aclaratoria_correcta,Pidió el período YYYY-MM y no asumió un mes.
+2026-11-24,OBS-05,1,Servicios Creativos (Empresa de demostración),2026-13,,,,,42,periodo_invalido_rechazado,Indicó que el mes debe estar entre 01 y 12 y pidió un período válido.
+2026-11-24,OBS-02,1,Diseño Norte (Empresa de demostración),2026-10,515500,515500,131700,131700,21,coinciden_montos,Ingresos y gastos coinciden con los valores esperados.
